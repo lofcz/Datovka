@@ -114,11 +114,11 @@ client.LoginWithCertificateAndDataBoxId(stream, dataBoxId, "certificate-password
 
 #### Advanced: Customizing Certificate Storage Flags
 
-By default, certificates are loaded with `MachineKeySet | PersistKeySet | Exportable` flags. You can customize these:
+By default, certificates are loaded with `MachineKeySet | PersistKeySet` flags. You can customize these:
 
 ```csharp
 // Custom storage flags for specific security requirements
-var customFlags = X509KeyStorageFlags.UserKeySet | X509KeyStorageFlags.Exportable;
+var customFlags = X509KeyStorageFlags.UserKeySet;
 client.LoginWithCertificate("path/to/cert.pfx", "password", customFlags);
 
 // Also works with HSS mode
