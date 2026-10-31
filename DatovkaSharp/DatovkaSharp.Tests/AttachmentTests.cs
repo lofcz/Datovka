@@ -102,6 +102,32 @@ namespace DatovkaSharp.Tests
             ClassicAssert.AreEqual("text/plain", txtMime);
             ClassicAssert.AreEqual("application/vnd.software602.filler.form-xml-zip", zfoMime);
         }
+
+        [TestCase("archive.zip", "application/zip")]
+        [TestCase("Invoice.EDI", "application/edifact")]
+        [TestCase("data.csv", "text/csv")]
+        [TestCase("scan.tiff", "image/tiff")]
+        [TestCase("sheet.ods", "application/vnd.oasis.opendocument.spreadsheet")]
+        [TestCase("signed.asice", "application/vnd.etsi.asic-e+zip")]
+        [TestCase("note.xml", "application/xml")]
+        [TestCase("slides.pptx", "application/vnd.openxmlformats-officedocument.presentationml.presentation")]
+        [TestCase("tachograph.ddd", "application/octet-stream")]
+        [TestCase("no-extension", "application/octet-stream")]
+        public void DataBoxHelper_GetMimeType_ShouldFollowTheOperatorsList(string fileName, string expected)
+        {
+            ClassicAssert.AreEqual(expected, DataBoxHelper.GetMimeType(fileName));
+        }
+
+        [Test]
+        public void MaxReceivedMessageBytes_ShouldHoldTheSignedFormOfTheLargestMessage()
+        {
+            // Attachments in Base64 inside the signed structure, which is in Base64 again in the answer.
+            long largestMessage = 100L * 1024 * 1024;
+            long largestAnswer = largestMessage * 4 / 3 * 4 / 3;
+
+            Assert.That(DatovkaClient.MaxReceivedMessageBytes, Is.GreaterThan(largestAnswer));
+            Assert.That(DatovkaClient.MaxReceivedMessageBytes, Is.LessThanOrEqualTo(int.MaxValue));
+        }
     }
 }
 

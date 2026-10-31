@@ -592,6 +592,15 @@ namespace DatovkaSharp.Services.Search
         
         /// <remarks/>
         OVM_PO,
+        
+        /// <remarks/>
+        PFO_BASE,
+        
+        /// <remarks/>
+        PO_BASE,
+        
+        /// <remarks/>
+        OVM_MAIN,
     }
     
     /// <remarks/>
@@ -2442,6 +2451,12 @@ namespace DatovkaSharp.Services.Search
         
         /// <remarks/>
         FO,
+        
+        /// <remarks/>
+        PFO_BASE,
+        
+        /// <remarks/>
+        PO_BASE,
     }
     
     /// <remarks/>
@@ -2953,6 +2968,12 @@ namespace DatovkaSharp.Services.Search
         
         /// <remarks/>
         FO,
+        
+        /// <remarks/>
+        PFO_BASE,
+        
+        /// <remarks/>
+        PO_BASE,
     }
     
     /// <remarks/>

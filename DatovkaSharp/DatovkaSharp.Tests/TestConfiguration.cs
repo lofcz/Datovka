@@ -58,7 +58,7 @@ namespace DatovkaSharp.Tests
                 throw new FileNotFoundException(
                     $"Configuration file not found: {configPath}\n" +
                     "Please copy appCfg.example.json to appCfg.json and fill in your test credentials.\n" +
-                    "See https://info.mojedatovaschranka.cz/info/cs/74.html for information on creating test accounts."
+                    "See https://datovka.gov.cz/info/cs/74.html for information on creating test accounts."
                 );
             }
 

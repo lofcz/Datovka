@@ -69,40 +69,94 @@ namespace DatovkaSharp
         };
 
         /// <summary>
-        /// Get MIME type for a file
+        /// MIME type ISDS expects for each permitted attachment extension: the operator's list
+        /// "Seznam povolených přípon příloh zprávy" (WS_manipulace_s_datovymi_zpravami, Provozní řád
+        /// of 26 June 2026), taking its preferred type where it lists several. ISDS tests the declared
+        /// type against the content, and a ZIP or ASiC container must declare its own.
+        /// </summary>
+        private static readonly Dictionary<string, string> MimeTypes = new Dictionary<string, string>
+        {
+            { "asice", "application/vnd.etsi.asic-e+zip" },
+            { "asics", "application/vnd.etsi.asic-s+zip" },
+            { "cer", "application/x-x509-ca-cert" },
+            { "crt", "application/x-x509-ca-cert" },
+            { "csv", "text/csv" },
+            { "dbf", "application/octet-stream" },
+            { "ddd", "application/octet-stream" },
+            { "der", "application/x-x509-ca-cert" },
+            { "dgn", "application/octet-stream" },
+            { "doc", "application/msword" },
+            { "docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document" },
+            { "dwg", "image/vnd.dwg" },
+            { "edi", "application/edifact" },
+            { "fo", "application/vnd.software602.filler.form+xml" },
+            { "gfs", "application/xml" },
+            { "gif", "image/gif" },
+            { "gml", "application/xml" },
+            { "heic", "image/heic" },
+            { "heif", "image/heif" },
+            { "htm", "text/html" },
+            { "html", "text/html" },
+            { "isdoc", "text/isdoc" },
+            { "isdocx", "text/isdocx" },
+            { "jfif", "image/jpeg" },
+            { "jpeg", "image/jpeg" },
+            { "jpg", "image/jpeg" },
+            { "json", "application/json" },
+            { "m4a", "audio/mp4" },
+            { "m4p", "audio/mp4" },
+            { "m4v", "video/mp4" },
+            { "mp2", "audio/mpeg" },
+            { "mp3", "audio/mpeg" },
+            { "mp4", "audio/mp4" },
+            { "mpeg", "video/mpeg" },
+            { "mpeg1", "video/mpeg" },
+            { "mpeg2", "video/mpeg" },
+            { "mpg", "video/mpeg" },
+            { "odp", "application/vnd.oasis.opendocument.presentation" },
+            { "ods", "application/vnd.oasis.opendocument.spreadsheet" },
+            { "odt", "application/vnd.oasis.opendocument.text" },
+            { "p7b", "application/pkcs7-certificates" },
+            { "p7c", "application/pkcs7-mime" },
+            { "p7f", "application/pkcs7-signature" },
+            { "p7m", "application/pkcs7-mime" },
+            { "p7s", "application/pkcs7-signature" },
+            { "pdf", "application/pdf" },
+            { "pk7", "application/pkcs7-mime" },
+            { "png", "image/png" },
+            { "ppt", "application/vnd.ms-powerpoint" },
+            { "pptx", "application/vnd.openxmlformats-officedocument.presentationml.presentation" },
+            { "prj", "application/octet-stream" },
+            { "qix", "application/octet-stream" },
+            { "rtf", "application/msword" },
+            { "sbn", "application/octet-stream" },
+            { "sbx", "application/octet-stream" },
+            { "sce", "application/vnd.etsi.asic-e+zip" },
+            { "scs", "application/vnd.etsi.asic-s+zip" },
+            { "shp", "application/octet-stream" },
+            { "shx", "application/octet-stream" },
+            { "tif", "image/tiff" },
+            { "tiff", "image/tiff" },
+            { "tsr", "application/timestamp-reply" },
+            { "tst", "application/timestamp-reply" },
+            { "txt", "text/plain" },
+            { "wav", "audio/wav" },
+            { "xls", "application/vnd.ms-excel" },
+            { "xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" },
+            { "xml", "application/xml" },
+            { "xsd", "application/xml" },
+            { "zfo", "application/vnd.software602.filler.form-xml-zip" },
+            { "zip", "application/zip" },
+        };
+
+        /// <summary>
+        /// Get MIME type for a file. An extension outside the operator's list, which ISDS refuses
+        /// anyway, gets application/octet-stream.
         /// </summary>
         public static string GetMimeType(string fileName)
         {
-            Dictionary<string, string> mimeTypes = new Dictionary<string, string>
-            {
-                { "isdoc", "text/isdoc" },
-                { "isdocx", "text/isdocx" },
-                { "zfo", "application/vnd.software602.filler.form-xml-zip" }
-            };
-
             string extension = System.IO.Path.GetExtension(fileName)?.TrimStart('.').ToLowerInvariant() ?? string.Empty;
-            
-            if (!string.IsNullOrEmpty(extension) && mimeTypes.TryGetValue(extension, out string? type))
-            {
-                return type;
-            }
-
-            // Default MIME type detection for common types
-            return extension switch
-            {
-                "pdf" => "application/pdf",
-                "jpg" or "jpeg" => "image/jpeg",
-                "png" => "image/png",
-                "gif" => "image/gif",
-                "txt" => "text/plain",
-                "xml" => "text/xml",
-                "doc" => "application/msword",
-                "docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                "xls" => "application/vnd.ms-excel",
-                "xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                _ => "application/octet-stream"
-            };
+            return MimeTypes.TryGetValue(extension, out string? type) ? type : "application/octet-stream";
         }
     }
 }
-

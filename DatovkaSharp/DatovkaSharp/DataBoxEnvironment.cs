@@ -6,12 +6,12 @@ namespace DatovkaSharp
     public enum DataBoxEnvironment
     {
         /// <summary>
-        /// Test environment (czebox.cz)
+        /// Test environment (datovka-test.gov.cz)
         /// </summary>
         Test,
 
         /// <summary>
-        /// Production environment (mojedatovaschranka.cz)
+        /// Production environment (datovka.gov.cz)
         /// </summary>
         Production
     }

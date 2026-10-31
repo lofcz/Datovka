@@ -9,7 +9,7 @@ To run the tests, you need to create test accounts and configure credentials.
 ### 1. Create Test Accounts
 
 Create two test accounts on the Czech Data Box test environment:
-- Visit: https://info.mojedatovaschranka.cz/info/cs/74.html
+- Visit: https://datovka.gov.cz/info/cs/74.html
 - Follow the instructions to create test accounts
 - You will receive login credentials (username and password) for each account
 

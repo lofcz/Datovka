@@ -12,7 +12,7 @@ This directory is for placing test certificates to test certificate-based authen
 ### SS (Spisová služba) Certificate
 - **Mode**: Filing Service
 - **Authentication**: System certificate only (no username required)
-- **Endpoint**: `https://ws1c.mojedatovaschranka.cz/cert/`
+- **Endpoint**: `https://ws1c.datovka.gov.cz/cert/`
 - **Example configuration**:
   ```json
   "ssCertificatePath": "Certificates/ss_certificate.pfx",
@@ -22,7 +22,7 @@ This directory is for placing test certificates to test certificate-based authen
 ### HSS (Hostovaná spisová služba) Certificate
 - **Mode**: Hosted Filing Service
 - **Authentication**: System certificate + Target DataBox ID
-- **Endpoint**: `https://ws1c.mojedatovaschranka.cz/hspis/`
+- **Endpoint**: `https://ws1c.datovka.gov.cz/hspis/`
 - **Use case**: External applications accessing specific data boxes
 - **Example configuration**:
   ```json
