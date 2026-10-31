@@ -20,7 +20,7 @@ _Sponsored by Scio_
 
 ## ✨ Features
 
-- Full support for Czech Data Box API (2025/09, [v3.0.9](https://info.mojedatovaschranka.cz/info/files/2224_Info_pro_vyvojare_2025_9.pdf))
+- Compatible with the Czech Data Box API as of 2026/10 ([developer notice](https://datovka.gov.cz/info/files/2258_Info_pro_vyvojare_2026_10.pdf), WSDL 3.11)
 - Multiple authentication methods:
   - Username/Password
   - Certificate-based (Spisová služba - SS mode)
@@ -468,7 +468,7 @@ catch (MissingMainFileException ex)
 ### Validation Rules
 
 - **Maximum 50 recipients** per message
-- **Maximum 25 MB total** attachment size
+- **Maximum 20 MB total** attachment size
 - **At least 1 attachment** required (Czech Data Box requirement)
 - **Subject/annotation is required**
 - **At least one recipient** is required
@@ -658,7 +658,7 @@ Run the following from terminal:
 dotnet test
 ```
 
-Test credentials (for test environment) are required. Create two test accounts as described here: https://info.mojedatovaschranka.cz/info/cs/74.html.
+Test credentials (for test environment) are required. Create two test accounts as described here: https://datovka.gov.cz/info/cs/74.html.
 
 ## License
 

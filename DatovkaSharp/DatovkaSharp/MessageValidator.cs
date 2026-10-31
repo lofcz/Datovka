@@ -16,9 +16,9 @@ namespace DatovkaSharp
         public const int MaxRecipients = 50;
 
         /// <summary>
-        /// Maximum total size of all attachments in bytes (25 MB).
+        /// Maximum total size of all attachments in bytes (20 MB). Above it ISDS takes only a big message (VoDZ).
         /// </summary>
-        public const long MaxTotalSizeBytes = 25 * 1024 * 1024;
+        public const long MaxTotalSizeBytes = 20 * 1024 * 1024;
 
         /// <summary>
         /// Validates a message before sending to ensure it meets all ISDS requirements.

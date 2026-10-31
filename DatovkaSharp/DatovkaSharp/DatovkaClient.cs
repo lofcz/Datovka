@@ -397,8 +397,8 @@ namespace DatovkaSharp
 
             // Environment
             baseUrl += _environment == DataBoxEnvironment.Test 
-                ? ".czebox.cz/" 
-                : ".mojedatovaschranka.cz/";
+                ? ".datovka-test.gov.cz/" 
+                : ".datovka.gov.cz/";
 
             // Certificate path - depends on authentication mode
             if (_useCertificate)
@@ -424,12 +424,19 @@ namespace DatovkaSharp
             return baseUrl;
         }
 
+        /// <summary>
+        /// Largest SOAP answer accepted (256 MB). A big message (VoDZ) holds up to 100 MB of attachments;
+        /// its signed form (ZFO) is that in Base64 inside a signed structure, itself in Base64 in the
+        /// answer, so about 1.8 times the attachments, and each archive stamp adds about 0.5 MB.
+        /// </summary>
+        public const long MaxReceivedMessageBytes = 256 * 1024 * 1024;
+
         private Binding CreateBinding()
         {
             BasicHttpsBinding binding = new BasicHttpsBinding(BasicHttpsSecurityMode.Transport)
             {
-                MaxReceivedMessageSize = 10485760, // 10 MB
-                MaxBufferSize = 10485760,
+                MaxReceivedMessageSize = MaxReceivedMessageBytes,
+                MaxBufferSize = (int)MaxReceivedMessageBytes,
                 SendTimeout = TimeSpan.FromMinutes(5),
                 ReceiveTimeout = TimeSpan.FromMinutes(5),
                 OpenTimeout = TimeSpan.FromMinutes(1),
